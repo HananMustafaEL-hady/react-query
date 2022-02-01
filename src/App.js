@@ -7,6 +7,7 @@ import { QueryClientProvider, QueryClient } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { RQSuperHeroPage } from "./components/RQSuperHero.page";
 import { PaginatedQueriesPage } from "./components/PaginatedQueries.page";
+import { InfiniteQueriesPage } from "./components/InfiniteQueries.page";
 
 const queryClient = new QueryClient();
 function App() {
@@ -39,6 +40,9 @@ function App() {
             </Route>
             <Route path="/rq-super-heroes">
               <RQSuperHeroesPage />
+            </Route>
+            <Route path="/rq-infinite">
+              <InfiniteQueriesPage />
             </Route>
             <Route path="/">
               <HomePage />

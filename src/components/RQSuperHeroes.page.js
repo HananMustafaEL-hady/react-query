@@ -1,24 +1,38 @@
-import { useQuery } from "react-query";
 import axios from "axios";
-import { Fragment } from "react/cjs/react.production.min";
-
+import { useSuperHeroesData } from "../hooks/useSuperHeroesData";
+import { Link } from "react-router-dom";
 const fetchSuperHeroes = () => {
   return axios.get("http://localhost:4000/superheroes");
 };
 export const RQSuperHeroesPage = () => {
-  const { isLoading, data, isError, error } = useQuery(
-    "super-heroes",
-    fetchSuperHeroes
-  );
+  const onSuccess = (data) => {
+    console.log("onSuccess", data);
+  };
 
-  if (isLoading) return <p>Loading........</p>;
+  const onError = (error) => {
+    console.log("onError", error);
+  };
+  const { isLoading, data, isError, error, isFetching, refetch } =
+    useSuperHeroesData(onSuccess, onError);
+
+  // console.log("isFetching", isFetching, "isLoading", isLoading);
+
+  if (isLoading || isFetching) return <p>Loading........</p>;
   if (isError) return <p>{error.message}</p>;
   return (
-    <Fragment>
+    <>
       <h2>React Query Super Heroes Page</h2>
+      {/* <button onClick={refetch}>fetch heroes</button> */}
       {data?.data.map((hero) => {
-        return <div key={hero.name}>{hero.name}</div>;
+        return (
+          <div key={hero.id}>
+            <Link to={`/rq-super-heroes/${hero.id}`}>{hero.name}</Link>
+          </div>
+        );
       })}
-    </Fragment>
+      {/* {data?.map((hero) => {
+        return <div key={hero}>{hero}</div>;
+      })} */}
+    </>
   );
 };

@@ -14,10 +14,12 @@ nav ul {
   padding: 16px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
-
+nav ul a {
+  color: #fff;
+}
 a {
   text-decoration: none;
-  color: #fff;
+  color: rgb(20, 19, 19);
 }
 nav ul li {
   list-style-type: none;

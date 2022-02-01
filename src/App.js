@@ -4,6 +4,8 @@ import { HomePage } from "./components/Home.page";
 import { RQSuperHeroesPage } from "./components/RQSuperHeroes.page";
 import { SuperHeroesPage } from "./components/SuperHeroes.page";
 import { QueryClientProvider, QueryClient } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
+import { RQSuperHeroPage } from "./components/RQSuperHero.page";
 
 const queryClient = new QueryClient();
 function App() {
@@ -25,6 +27,9 @@ function App() {
             </ul>
           </nav>
           <Switch>
+            <Route path="/rq-super-heroes/:heroId">
+              <RQSuperHeroPage />
+            </Route>
             <Route path="/super-heroes">
               <SuperHeroesPage />
             </Route>
@@ -37,6 +42,7 @@ function App() {
           </Switch>
         </div>
       </Router>
+      <ReactQueryDevtools initialIsOpem={false} position="bottom-right" />
     </QueryClientProvider>
   );
 }
